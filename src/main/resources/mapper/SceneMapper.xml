@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sg.asia21at.webdev.footprintimporter.mybatis.mapper.SceneMapper">
+  <resultMap id="BaseResultMap" type="sg.asia21at.webdev.footprintimporter.entity.Scene">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="lat" jdbcType="DOUBLE" property="lat" />
+    <result column="lon" jdbcType="DOUBLE" property="lon" />
+    <result column="cloud_cover" jdbcType="DOUBLE" property="cloudCover" />
+    <result column="roll" jdbcType="DOUBLE" property="roll" />
+    <result column="pitch" jdbcType="DOUBLE" property="pitch" />
+    <result column="scene_num" jdbcType="INTEGER" property="sceneNum" />
+    <result column="satellite" jdbcType="INTEGER" property="satellite" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="geom" jdbcType="OTHER" property="geom" />
+    <result column="strip_id" jdbcType="VARCHAR" property="stripId" />
+    <result column="folder_name" jdbcType="VARCHAR" property="folderName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    "id", "start_time", "lat", "lon", "cloud_cover", "roll", "pitch", "scene_num", "satellite",
+    "end_time", "geom", "strip_id", "folder_name"
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from "public"."india_bhuvan"
+    where "id" = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from "public"."india_bhuvan"
+    where "id" = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="sg.asia21at.webdev.footprintimporter.entity.Scene" useGeneratedKeys="true">
+    insert into "public"."india_bhuvan" ("start_time", "lat", "lon",
+      "cloud_cover", "roll", "pitch",
+      "scene_num", "satellite", "end_time",
+      "geom", "strip_id", "folder_name"
+      )
+    values (#{startTime,jdbcType=TIMESTAMP}, #{lat,jdbcType=DOUBLE}, #{lon,jdbcType=DOUBLE},
+      #{cloudCover,jdbcType=DOUBLE}, #{roll,jdbcType=DOUBLE}, #{pitch,jdbcType=DOUBLE},
+      #{sceneNum,jdbcType=INTEGER}, #{satellite,jdbcType=INTEGER}, #{endTime,jdbcType=TIMESTAMP},
+      #{geom,jdbcType=OTHER}, #{stripId,jdbcType=VARCHAR}, #{folderName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertList" keyColumn="id" keyProperty="id"
+		parameterType="java.util.List" useGeneratedKeys="true">
+        insert into "public"."india_bhuvan" ("start_time", "lat", "lon",
+          "cloud_cover", "roll", "pitch",
+          "scene_num", "satellite", "end_time",
+          "geom", "strip_id", "folder_name"
+          )
+		values
+		<foreach collection="list" item="element" index="index"
+			separator=",">
+            (#{element.startTime,jdbcType=TIMESTAMP},
+             #{element.lat,jdbcType=DOUBLE},
+             #{element.lon,jdbcType=DOUBLE},
+             #{element.cloudCover,jdbcType=DOUBLE},
+             #{element.roll,jdbcType=DOUBLE},
+             #{element.pitch,jdbcType=DOUBLE},
+             #{element.sceneNum,jdbcType=INTEGER},
+             #{element.satellite,jdbcType=INTEGER},
+             #{element.endTime,jdbcType=TIMESTAMP},
+             #{element.geom,jdbcType=OTHER},
+             #{element.stripId,jdbcType=VARCHAR},
+             #{element.folderName,jdbcType=VARCHAR}
+              )
+		</foreach>
+	</insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="sg.asia21at.webdev.footprintimporter.entity.Scene" useGeneratedKeys="true">
+    insert into "public"."india_bhuvan"
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="startTime != null">
+        "start_time",
+      </if>
+      <if test="lat != null">
+        "lat",
+      </if>
+      <if test="lon != null">
+        "lon",
+      </if>
+      <if test="cloudCover != null">
+        "cloud_cover",
+      </if>
+      <if test="roll != null">
+        "roll",
+      </if>
+      <if test="pitch != null">
+        "pitch",
+      </if>
+      <if test="sceneNum != null">
+        "scene_num",
+      </if>
+      <if test="satellite != null">
+        "satellite",
+      </if>
+      <if test="endTime != null">
+        "end_time",
+      </if>
+      <if test="geom != null">
+        "geom",
+      </if>
+      <if test="stripId != null">
+        "strip_id",
+      </if>
+      <if test="folderName != null">
+        "folder_name",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="lon != null">
+        #{lon,jdbcType=DOUBLE},
+      </if>
+      <if test="cloudCover != null">
+        #{cloudCover,jdbcType=DOUBLE},
+      </if>
+      <if test="roll != null">
+        #{roll,jdbcType=DOUBLE},
+      </if>
+      <if test="pitch != null">
+        #{pitch,jdbcType=DOUBLE},
+      </if>
+      <if test="sceneNum != null">
+        #{sceneNum,jdbcType=INTEGER},
+      </if>
+      <if test="satellite != null">
+        #{satellite,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="geom != null">
+        #{geom,jdbcType=OTHER},
+      </if>
+      <if test="stripId != null">
+        #{stripId,jdbcType=VARCHAR},
+      </if>
+      <if test="folderName != null">
+        #{folderName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="sg.asia21at.webdev.footprintimporter.entity.Scene">
+    update "public"."india_bhuvan"
+    <set>
+      <if test="startTime != null">
+        "start_time" = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lat != null">
+        "lat" = #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="lon != null">
+        "lon" = #{lon,jdbcType=DOUBLE},
+      </if>
+      <if test="cloudCover != null">
+        "cloud_cover" = #{cloudCover,jdbcType=DOUBLE},
+      </if>
+      <if test="roll != null">
+        "roll" = #{roll,jdbcType=DOUBLE},
+      </if>
+      <if test="pitch != null">
+        "pitch" = #{pitch,jdbcType=DOUBLE},
+      </if>
+      <if test="sceneNum != null">
+        "scene_num" = #{sceneNum,jdbcType=INTEGER},
+      </if>
+      <if test="satellite != null">
+        "satellite" = #{satellite,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null">
+        "end_time" = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="geom != null">
+        "geom" = #{geom,jdbcType=OTHER},
+      </if>
+      <if test="stripId != null">
+        "strip_id" = #{stripId,jdbcType=VARCHAR},
+      </if>
+      <if test="folderName != null">
+        "folder_name" = #{folderName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "id" = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="sg.asia21at.webdev.footprintimporter.entity.Scene">
+    update "public"."india_bhuvan"
+    set "start_time" = #{startTime,jdbcType=TIMESTAMP},
+      "lat" = #{lat,jdbcType=DOUBLE},
+      "lon" = #{lon,jdbcType=DOUBLE},
+      "cloud_cover" = #{cloudCover,jdbcType=DOUBLE},
+      "roll" = #{roll,jdbcType=DOUBLE},
+      "pitch" = #{pitch,jdbcType=DOUBLE},
+      "scene_num" = #{sceneNum,jdbcType=INTEGER},
+      "satellite" = #{satellite,jdbcType=INTEGER},
+      "end_time" = #{endTime,jdbcType=TIMESTAMP},
+      "geom" = #{geom,jdbcType=OTHER},
+      "strip_id" = #{stripId,jdbcType=VARCHAR},
+      "folder_name" = #{folderName,jdbcType=VARCHAR}
+    where "id" = #{id,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>

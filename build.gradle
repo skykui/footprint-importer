@@ -1,0 +1,38 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    baseName = 'footprint-importer'
+    version =  '1.0.0'
+}
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-log4j2')
+    compile('org.springframework.boot:spring-boot-starter')
+    compile('net.postgis:postgis-jdbc:2.2.1')
+	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.1')
+	runtime('org.postgresql:postgresql')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+configurations {
+    all*.exclude module : 'spring-boot-starter-logging'
+}
