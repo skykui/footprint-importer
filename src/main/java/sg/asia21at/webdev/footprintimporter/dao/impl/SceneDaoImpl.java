@@ -1,10 +1,11 @@
-package sg.asia21at.webdev.footprintimporter.dao;
+package sg.asia21at.webdev.footprintimporter.dao.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import sg.asia21at.webdev.footprintimporter.dao.ISceneDao;
 import sg.asia21at.webdev.footprintimporter.entity.Scene;
 import sg.asia21at.webdev.footprintimporter.mybatis.mapper.SceneMapper;
 
